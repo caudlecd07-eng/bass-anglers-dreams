@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>be.safe</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#f4f7fb;color:#152033}
+header{background:#173b63;color:white;padding:18px 22px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-size:28px;font-weight:800;letter-spacing:-1px}.logo span{color:#76d7c4}
+main{max-width:1050px;margin:24px auto;padding:0 16px;display:grid;grid-template-columns:280px 1fr;gap:18px}
+.card{background:white;border-radius:18px;box-shadow:0 5px 20px #00000012;overflow:hidden}
+.sidebar{padding:18px}.new{width:100%;border:0;border-radius:12px;background:#173b63;color:white;padding:13px;font-weight:bold;font-size:15px;margin-bottom:16px}
+.contact{padding:13px;border-radius:12px;margin:5px 0;cursor:pointer}.contact:hover,.contact.active{background:#e8f4f2}
+.avatar{display:inline-flex;width:38px;height:38px;border-radius:50%;background:#76d7c4;align-items:center;justify-content:center;font-weight:bold;margin-right:10px}
+.chat{display:flex;flex-direction:column;min-height:650px}.chathead{padding:17px 20px;border-bottom:1px solid #e8edf3;font-weight:bold}
+.messages{flex:1;padding:22px;overflow:auto}.bubble{max-width:70%;padding:11px 14px;border-radius:16px;margin:8px 0;line-height:1.35}.mine{margin-left:auto;background:#173b63;color:white;border-bottom-right-radius:5px}.theirs{background:#edf1f5;border-bottom-left-radius:5px}
+.composer{display:flex;gap:9px;padding:15px;border-top:1px solid #e8edf3}.composer input{flex:1;padding:13px;border:1px solid #ccd5df;border-radius:12px;font-size:15px}.send{border:0;background:#76d7c4;padding:0 20px;border-radius:12px;font-weight:bold}
+.actions{display:flex;gap:8px;padding:0 20px 14px}.actions button{border:0;border-radius:10px;padding:10px 13px;background:#edf1f5;cursor:pointer}.actions button:hover{background:#dce5ee}
+.note{max-width:1050px;margin:0 auto 20px;padding:0 16px;color:#607086;font-size:13px}
+@media(max-width:700px){main{grid-template-columns:1fr}.sidebar{display:none}.chat{min-height:75vh}.bubble{max-width:85%}}
+</style>
+</head>
+<body>
+<header><div class="logo">be<span>.safe</span></div><div>Private • Simple • Safe</div></header>
+<main>
+<section class="card sidebar">
+<button class="new" onclick="newChat()">＋ New conversation</button>
+<div class="contact active" onclick="selectContact(this,'Alex')"><span class="avatar">A</span>Alex</div>
+<div class="contact" onclick="selectContact(this,'Mom')"><span class="avatar">M</span>Mom</div>
+<div class="contact" onclick="selectContact(this,'Jordan')"><span class="avatar">J</span>Jordan</div>
+<div class="contact" onclick="selectContact(this,'Sam')"><span class="avatar">S</span>Sam</div>
+</section>
+<section class="card chat">
+<div class="chathead" id="chatName">Alex</div>
+<div class="actions">
+<button onclick="startCall()">☎ Call</button>
+<button onclick="alert('This demo does not place real calls or send real SMS messages.')">Text</button>
+</div>
+<div class="messages" id="messages">
+<div class="bubble theirs">Hey! This is be.safe 👋</div>
+<div class="bubble theirs">You can use this page as a simple messaging interface.</div>
+</div>
+<div class="composer">
+<input id="msg" placeholder="Type a message..." onkeydown="if(event.key==='Enter')send()">
+<button class="send" onclick="send()">Send</button>
+</div>
+</section>
+</main>
+<div class="note">Demo website: messages and calls are simulated in your browser. Real phone calls/SMS require a separate communications service and appropriate account setup.</div>
+<script>
+function send(){
+ const input=document.getElementById('msg'); const text=input.value.trim(); if(!text)return;
+ const b=document.createElement('div'); b.className='bubble mine'; b.textContent=text;
+ document.getElementById('messages').appendChild(b); input.value='';
+ setTimeout(()=>{const r=document.createElement('div');r.className='bubble theirs';r.textContent='Message received in this demo.';document.getElementById('messages').appendChild(r);},500);
+}
+function selectContact(el,name){document.querySelectorAll('.contact').forEach(x=>x.classList.remove('active'));el.classList.add('active');document.getElementById('chatName').textContent=name;document.getElementById('messages').innerHTML='<div class="bubble theirs">You are chatting with '+name+' in the be.safe demo.</div>'}
+function newChat(){alert('New conversation: choose a contact from the list to begin.')}
+function startCall(){alert('Calling '+document.getElementById('chatName').textContent+' — demo only. No real call is placed.')}
+</script>
+</body>
+</html>
