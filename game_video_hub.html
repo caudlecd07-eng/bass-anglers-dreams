@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Game & Video Hub</title>
+  <style>
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:Arial,Helvetica,sans-serif;
+      background:linear-gradient(135deg,#111827,#0f172a 45%,#1e293b);
+      color:white;
+      min-height:100vh;
+    }
+    header{
+      padding:28px 18px 18px;
+      text-align:center;
+    }
+    h1{margin:0;font-size:34px}
+    .sub{color:#cbd5e1;margin-top:8px}
+    .wrap{max-width:1000px;margin:auto;padding:18px}
+    .panel{
+      background:rgba(255,255,255,.07);
+      border:1px solid rgba(255,255,255,.12);
+      border-radius:20px;
+      padding:20px;
+      margin-bottom:20px;
+      backdrop-filter:blur(8px);
+    }
+    .search{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    input{
+      flex:1;
+      min-width:220px;
+      padding:14px;
+      border-radius:12px;
+      border:none;
+      font-size:16px;
+    }
+    button,.card{
+      border:none;
+      border-radius:14px;
+      padding:14px 18px;
+      font-size:16px;
+      font-weight:bold;
+      cursor:pointer;
+      text-decoration:none;
+      color:white;
+      transition:.2s;
+    }
+    button{background:#ef4444}
+    button:hover,.card:hover{transform:translateY(-2px);filter:brightness(1.08)}
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+      gap:14px;
+    }
+    .card{
+      min-height:90px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      background:#2563eb;
+    }
+    .card:nth-child(2n){background:#7c3aed}
+    .card:nth-child(3n){background:#059669}
+    .card:nth-child(4n){background:#ea580c}
+    .note{
+      color:#94a3b8;
+      font-size:13px;
+      text-align:center;
+      margin:26px 0 8px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🎮 Game & Video Hub</h1>
+    <div class="sub">One page for videos and browser games</div>
+  </header>
+
+  <main class="wrap">
+    <section class="panel">
+      <h2>▶ YouTube</h2>
+      <div class="search">
+        <input id="ytSearch" placeholder="Search YouTube..." />
+        <button onclick="searchYouTube()">Search</button>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>🕹 Games</h2>
+      <div class="grid">
+        <a class="card" href="https://poxel.io/" target="_blank" rel="noopener">Poxel.io</a>
+        <a class="card" href="https://www.crazygames.com/" target="_blank" rel="noopener">CrazyGames</a>
+        <a class="card" href="https://www.coolmathgames.com/" target="_blank" rel="noopener">Coolmath Games</a>
+        <a class="card" href="https://shellshock.io/" target="_blank" rel="noopener">Shell Shockers</a>
+        <a class="card" href="https://skribbl.io/" target="_blank" rel="noopener">Skribbl.io</a>
+        <a class="card" href="https://agar.io/" target="_blank" rel="noopener">Agar.io</a>
+        <a class="card" href="https://slither.io/" target="_blank" rel="noopener">Slither.io</a>
+        <a class="card" href="https://diep.io/" target="_blank" rel="noopener">Diep.io</a>
+        <a class="card" href="https://www.chess.com/play/computer" target="_blank" rel="noopener">Chess</a>
+        <a class="card" href="https://tetr.io/" target="_blank" rel="noopener">TETR.IO</a>
+        <a class="card" href="https://lichess.org/" target="_blank" rel="noopener">Lichess</a>
+        <a class="card" href="https://www.geoguessr.com/" target="_blank" rel="noopener">GeoGuessr</a>
+      </div>
+    </section>
+
+    <div class="note">
+      This page does not bypass school filters. Links only work where the destination site is allowed.
+    </div>
+  </main>
+
+  <script>
+    function searchYouTube(){
+      const q = document.getElementById('ytSearch').value.trim();
+      if(!q) return;
+      window.open('https://www.youtube.com/results?search_query=' + encodeURIComponent(q), '_blank');
+    }
+    document.getElementById('ytSearch').addEventListener('keydown', function(e){
+      if(e.key === 'Enter') searchYouTube();
+    });
+  </script>
+</body>
+</html>
